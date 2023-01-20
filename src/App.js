@@ -4,16 +4,18 @@ import "./App.css";
 import GoalList from "./components/GoalList/GoalList";
 import NewGoal from "./components/NewGoal/NewGoal";
 
+const initialState = [
+  { id: "cg1", text: "Finish the Course" },
+  { id: "cg2", text: "Learn all about the Course Main Topic" },
+  { id: "cg3", text: "Help other students in the Course Q&A" },
+];
+
 const App = () => {
-  const courseGoals = [
-    { id: "cg1", text: "Finish the Course" },
-    { id: "cg2", text: "Learn all about the Course Main Topic" },
-    { id: "cg3", text: "Help other students in the Course Q&A" },
-  ];
+  const [courseGoals, setCourseGoals] = React.useState(initialState);
 
   const addNewGoalHandler = (newGoal) => {
-    courseGoals.push(newGoal);
-    console.log(courseGoals);
+    // avoid deferring to setState, don't set state directly always use prev
+    setCourseGoals((prevCourseGoals) => prevCourseGoals.concat(newGoal));
   };
 
   return (
